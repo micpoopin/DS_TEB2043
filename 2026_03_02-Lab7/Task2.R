@@ -1,6 +1,6 @@
 library(dplyr)
 
-titanic = read.csv("titanic.csv")
+titanic = read.csv("C:/Users/nriza/OneDrive/Desktop/DS_TEB2043/2026_03_09-Lab8/titanic.csv")
 print(colSums(is.na(titanic)))
 
 #Rename column

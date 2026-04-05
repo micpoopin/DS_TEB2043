@@ -11,20 +11,31 @@ titanic_cleaned$Age = as.integer(titanic_cleaned$Age)
 
 #Replace NA age with mean age
 age_mean = as.integer(mean(titanic_cleaned$Age, na.rm = TRUE))
-#print(age_mean)
 titanic_cleaned$Age[is.na(titanic_cleaned$Age)] = age_mean
-print(colSums(is.na(titanic_cleaned)))
 
-#Insights
+## Insights
 survivors = filter(titanic_cleaned, Survived == 1)
 
-survived = nrow(survivors)
-total = nrow(titanic_cleaned)
-survival_rate = (survived/total) * 100
-print(paste(survived, "survived from", total))
-print(paste("Survival Rate is", round(survival_rate), "%"))
-
+# Pie Chart
 female = sum(survivors$Sex == "female")
 male = sum(survivors$Sex == "male")
+gender_survivor = c(male, female)
 
-test = pie(c(male, female), labels = c('Male', 'Female'), main = 'Titanic Survivor Based on Gender', col = c('blue', 'pink'))
+pie(gender_survivor, labels = gender_survivor, main = "Titanic Survivor by Gender", col = c('blue', 'pink'))
+legend("topright", c("Male", "Female"), cex = 0.8, fill = c('blue', "pink"))
+
+# Bar Chart
+pclass1 = sum(survivors$Pclass == 1)
+pclass2 = sum(survivors$Pclass == 2)
+pclass3 = sum(survivors$Pclass == 3)
+
+pclass_survivor = c(pclass1, pclass2, pclass3)
+
+barplot(
+  pclass_survivor,
+  names.arg = c("Class 1, Class 2, Class 3"),
+  xlab = "Class",
+  ylab = "Survivors",
+  col = "green",
+  main = "Titanic Survivors by Class"
+)
